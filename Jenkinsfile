@@ -3,7 +3,7 @@ pipeline {
 	agent any
 
 	environment {
-		IMAGE_NAME = "ramanuj/part-inventory-service"
+		IMAGE_NAME = "ram1uj/part-inventory-service"
 		IMAGE_TAG = "${BUILD_NUMBER}"
 	}
 
@@ -24,8 +24,9 @@ pipeline {
                 export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin
 
                 docker build \
-				-t ram1uj/part-inventory-service:${BUILD_NUMBER} \
-				-t ram1uj/part-inventory-service:latest .
+				-t ${IMAGE_NAME}:${IMAGE_TAG} \
+				-t ${IMAGE_NAME}:latest \
+				-f Dockerfile .
                 '''
 			}
 		}
