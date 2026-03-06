@@ -43,14 +43,14 @@ pipeline {
 		stage('Push Image') {
 			steps {
 				withCredentials([usernamePassword(
-					credentialsId: 'dockerhub',
+					credentialsId: 'e4af9f44-e2b9-4253-b040-14b40090e1a6',
 					passwordVariable: 'password',
-					usernameVariable: 'user'
+					usernameVariable: 'username'
 				)]) {
 					sh '''
             export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin
 
-            echo "$password" | docker login -u "$user" --password-stdin
+            echo "$password" | docker login -u "$username" --password-stdin
 
      	   	docker push ${IMAGE_NAME}:${IMAGE_TAG}
             docker push ${IMAGE_NAME}:latest
