@@ -13,22 +13,19 @@ pipeline {
 
 	stages {
 
-		stage('Checkout Code') {
+		stage('Source'){
 			steps {
-				git 'https://github.com/ramanujds/forvia-ci-repo'
+				echo 'Checking out source code from GitHub'
+				git branch: 'main', url: 'https://github.com/ramanujds/forvia-ci-repo'
 			}
 		}
 
-		stage('Build Docker Image') {
+		stage('Build') {
 			steps {
-				sh "docker build -t $IMAGE_NAME:$IMAGE_TAG ."
+				echo 'Building docker image'
+				sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
 			}
 		}
 
-		stage('List Image') {
-			steps {
-				sh "docker images"
-			}
-		}
 	}
 }
