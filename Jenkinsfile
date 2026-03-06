@@ -2,6 +2,10 @@ pipeline {
 
 	agent any
 
+	tools {
+		docker "docker"
+	}
+
 	environment {
 		IMAGE_NAME = "ramanuj/part-inventory-service"
 		IMAGE_TAG = "${BUILD_NUMBER}"
