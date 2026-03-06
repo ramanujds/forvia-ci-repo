@@ -16,16 +16,16 @@ pipeline {
 			}
 		}
 
-		stage('Setup Buildx') {
-			steps {
-				sh '''
-                export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin
-
-                docker buildx create --name multiarch-builder --use || true
-                docker buildx inspect --bootstrap
-                '''
-			}
-		}
+		//stage('Setup Buildx') {
+		//	steps {
+		//		sh '''
+        //        export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin
+		//
+        //        docker buildx create --name multiarch-builder --use || true
+        //        docker buildx inspect --bootstrap
+        //        '''
+		//	}
+		//}
 
 		stage('Build Multi-Arch Image') {
 			steps {
