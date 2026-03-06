@@ -16,16 +16,6 @@ pipeline {
 			}
 		}
 
-		//stage('Setup Buildx') {
-		//	steps {
-		//		sh '''
-        //        export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin
-		//
-        //        docker buildx create --name multiarch-builder --use || true
-        //        docker buildx inspect --bootstrap
-        //        '''
-		//	}
-		//}
 
 		stage('Build Multi-Arch Image') {
 			steps {
@@ -33,8 +23,7 @@ pipeline {
 				sh '''
                 export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin
 
-                docker buildx build \
-				--platform linux/amd64,linux/arm64 \
+                docker build \
 				-t ram1uj/part-inventory-service:${BUILD_NUMBER} \
 				-t ram1uj/part-inventory-service:latest .
                 '''
