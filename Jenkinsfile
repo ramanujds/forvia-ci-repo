@@ -34,10 +34,9 @@ pipeline {
                 export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin
 
                 docker buildx build \
-                --platform linux/amd64,linux/arm64 \
-                -t ${IMAGE_NAME}:${IMAGE_TAG} \
-                --load \
-                .
+				--platform linux/amd64,linux/arm64 \
+				-t ram1uj/part-inventory-service:${BUILD_NUMBER} \
+				-t ram1uj/part-inventory-service:latest .
                 '''
 			}
 		}
