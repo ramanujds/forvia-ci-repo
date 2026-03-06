@@ -24,6 +24,7 @@ pipeline {
                 export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin
 
                 docker build \
+                --platform linux/amd64 \
 				-t ${IMAGE_NAME}:${IMAGE_TAG} \
 				-t ${IMAGE_NAME}:latest \
 				-f Dockerfile .
