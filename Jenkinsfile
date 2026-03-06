@@ -40,5 +40,26 @@ pipeline {
 			}
 		}
 
+		stage('Push Image') {
+			steps {
+				withCredentials([usernamePassword(
+					credentialsId: 'dockerhub',
+					passwordVariable: 'password',
+					usernameVariable: 'user'
+				)]) {
+					sh '''
+            export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin
+
+            echo "$password" | docker login -u "$user" --password-stdin
+
+     	   	docker push ${IMAGE_NAME}:${IMAGE_TAG}
+            docker push ${IMAGE_NAME}:latest
+
+            docker logout
+            '''
+				}
+			}
+		}
+
 	}
 }
