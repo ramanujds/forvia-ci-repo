@@ -2,9 +2,6 @@ pipeline {
 
 	agent any
 
-	tools {
-		dockerTool 'docker'
-	}
 
 	environment {
 		IMAGE_NAME = "ramanuj/part-inventory-service"
@@ -23,7 +20,10 @@ pipeline {
 		stage('Build') {
 			steps {
 				echo 'Building docker image'
-				sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+				sh '''
+                export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin
+                docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                '''
 			}
 		}
 
