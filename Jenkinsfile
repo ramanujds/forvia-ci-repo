@@ -61,5 +61,22 @@ pipeline {
 			}
 		}
 
+		stage('Push to Kubernetes') {
+			steps {
+				withCredentials([file(credentialsId: 'aks-kubeconfig', variable: 'kubeconfig')]) {
+					sh '''
+					export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin
+
+					export KUBECONFIG=$kubeconfig
+
+					kubectl set image deployment/part-inventory-service part-inventory-service=${IMAGE_NAME}:${IMAGE_TAG} --namespace=default
+
+					kubectl rollout status deployment/part-inventory-service --namespace=default
+
+					'''
+				}
+			}
+		}
+
 	}
 }
